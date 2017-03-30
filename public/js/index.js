@@ -1,33 +1,26 @@
-/**
- * Created by Administrator on 2017/3/29.
- */
 $(function(){
-    // 登录注册的切换
-    $('#register a').click(function(){
-        $('#login').show();
-        $('#register').hide();
-    });
-
-    $('#login a').click(function(){
-        $('#login').hide();
-        $('#register').show();
-    });
-
-// 点击注册按钮，通过ajax提交数据
-    $('#register .submit').click(function(){
-        // 通过ajax提交交
-        $.ajax({
-            type:'post',
-            url:'/api/user/register',
-            data:{
-                username:$('#register').find('[name="username"]').val(),
-                password:$('#register').find('[name="password"]').val(),
-                repassword:$('#register').find('[name="repassword"]').val()
-            },
-            dataType:'json',
-            success:function(data){
-                console.log(data);
-            }
-        });
-    });
-});
+	removeLastMargin('.container .show-item');
+	
+	
+	var rotateDeg=0;
+	function renderArticleRotate(obj){		
+		rotateDeg++;
+		if(rotateDeg>=360){
+			rotateDeg=0;
+		}
+		obj.find('.indient span').css('transform','rotate('+rotateDeg+'deg)');	
+		
+	}
+	
+	$('.list-item').hover(function(){	
+		var $self=$(this);
+		this.timer=setInterval(function(){
+			renderArticleRotate($self);
+		},16)
+	},function(){		
+		clearInterval(this.timer);
+	});
+	
+	
+	
+})
